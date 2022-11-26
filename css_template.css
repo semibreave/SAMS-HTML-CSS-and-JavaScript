@@ -1,0 +1,30 @@
+body{
+	font-size : 1cm;
+	font-family: Verdana;
+	color: orange;
+	line-height: 1.2cm;
+	padding-left: 2cm;
+	padding-right: 6cm;
+	padding-top: 0.3cm;
+}
+
+h1.serious{
+	font: 2cm Verdana;
+	font-weight:bold;
+	color: green;
+}
+
+h1.chill{
+	font: 3cm Arial;
+	font-weight:bold;
+	color:pink;
+}
+
+p.subheader{
+		color: #593d97
+}
+
+div.footer{
+		font: 9pt;
+		color:blue;
+}
