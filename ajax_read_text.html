@@ -1,0 +1,48 @@
+<?xml 
+     version = "1.0" 
+     encoding = "UTF-8"
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+	<title>
+		This is serious : )
+	</title>
+
+    <link rel = "stylesheet" type = "text/css" href = "css_template.css" />
+  </head>	
+
+
+  <body>
+	
+	<h1>Eating Carrot </h1>
+	
+	<p>Boil it.Smash it.</p>
+	
+	
+	<div id="demo">
+		<h2>Let AJAX change this text</h2>
+		<button type="button" onclick="loadDoc()">Change Content</button>
+	</div>
+	
+	<script type = "text/javascript">
+	
+	function loadDoc() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("demo").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("GET", "ajax.txt", true);
+		xhttp.send();
+	}
+	
+	</script>
+
+  </body>	
+
+</html>
