@@ -1,0 +1,92 @@
+<?xml 
+     version = "1.0" 
+     encoding = "UTF-8"
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+  <head>
+	<title>
+		My Working Calendar
+	</title>
+
+	<link rel = "stylesheet" type = "text/css" href = "css_template.css" />
+  </head>	
+
+
+  <body>
+  
+
+	
+	<table id = "myTable">
+	
+		<style>
+			
+		table,th,td{ 	
+			border : 1px solid black;
+		|
+		</style>
+		
+		<tr>
+			<th>Day</th>
+			
+			<th>Date</th>
+			
+			<th>DOW</th>
+			
+			<th>Apply</th>
+			
+			
+		
+		</tr>
+	
+	</table>
+	
+	
+	<script type = "text/javascript">
+	
+		function addData(day,date,dow,apply){
+		
+		
+			var table = document.getElementById("myTable");
+			
+			// Insert a row at the end of table
+			var newRow = table.insertRow();
+
+			// Insert a cell at the end of the row
+			var dayCell = newRow.insertCell(0);
+			var dateCell = newRow.insertCell(1);
+			var dowCell = newRow.insertCell(2);
+			var applyCell = newRow.insertCell(3);
+			
+			// Append a text node to the cell
+			var dayText = document.createTextNode(day);
+			var dateText = document.createTextNode(date);
+			var dowText = document.createTextNode(dow);
+			var applyText = document.createTextNode(apply);
+			
+			dayCell.appendChild(dayText);
+			dateCell.appendChild(dateText);
+			dowCell.appendChild(dowText);
+			applyCell.appendChild(applyText);
+
+		}
+		
+			date = new Date('2022-03-20');
+
+		
+
+        for(i=1;i<=365;i++){
+		
+			date.setDate(date.getDate() + 1);
+			
+			addData(i,(date.getDate() + '/' + (date.getMonth() + 1)  + '/'+  (date.getUTCFullYear())),date.toDateString().split(' ')[0],0)
+		}
+	
+	</script>
+
+  </body>	
+
+</html>
