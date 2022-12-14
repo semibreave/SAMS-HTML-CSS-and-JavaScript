@@ -9,82 +9,181 @@
 
   <head>
 	<title>
-		My Working Calendar
+		Working Calendar
 	</title>
 
-	<link rel = "stylesheet" type = "text/css" href = "css_template.css" />
+    
   </head>	
 
 
   <body>
-  
-
-	
-	<table id = "myTable">
-	
-		<style>
-			
-		table,th,td{ 	
-			border : 1px solid black;
-		|
-		</style>
-		
-		<tr>
-			<th>Day</th>
-			
-			<th>Date</th>
-			
-			<th>DOW</th>
-			
-			<th>Apply</th>
-			
-			
-		
-		</tr>
-	
-	</table>
-	
 	
 	<script type = "text/javascript">
-	
-		function addData(day,date,dow,apply){
 		
+		var date = new Date('2022-03-20');
+		var leaves = 0;
+		var entitlement = 12;
+		var dailyEarning = entitlement/365;
+		const I = [];
+		const Day = [];
+		const DOW = [];
+		const Apply = [];
+		const Balance = [];
 		
-			var table = document.getElementById("myTable");
-			
-			// Insert a row at the end of table
-			var newRow = table.insertRow();
-
-			// Insert a cell at the end of the row
-			var dayCell = newRow.insertCell(0);
-			var dateCell = newRow.insertCell(1);
-			var dowCell = newRow.insertCell(2);
-			var applyCell = newRow.insertCell(3);
-			
-			// Append a text node to the cell
-			var dayText = document.createTextNode(day);
-			var dateText = document.createTextNode(date);
-			var dowText = document.createTextNode(dow);
-			var applyText = document.createTextNode(apply);
-			
-			dayCell.appendChild(dayText);
-			dateCell.appendChild(dateText);
-			dowCell.appendChild(dowText);
-			applyCell.appendChild(applyText);
-
-		}
-		
-			date = new Date('2022-03-20');
-
-		
-
-        for(i=1;i<=365;i++){
+		//Generate arrays for Date properties
+		for(i=1;i<=365;i++){
 		
 			date.setDate(date.getDate() + 1);
 			
-			addData(i,(date.getDate() + '/' + (date.getMonth() + 1)  + '/'+  (date.getUTCFullYear())),date.toDateString().split(' ')[0],0)
+		    I.push(i);
+			Day.push(date.getDate() + '/' + (date.getMonth() + 1)  + '/' +  (date.getUTCFullYear()) );
+			DOW.push(date.toDateString().split(' ')[0]);
+			
 		}
 	
+		//Generate array for leave applied
+		for(j=1;j<=365;j++){
+			
+			if(j==65){
+			
+				Apply.push(1);
+			}
+			
+			else{
+				Apply.push(0);
+			}
+		}
+		
+		//Generate array for leave Balance of each day
+		for(k=0;k<365;k++){
+			
+			leaves = leaves + dailyEarning - Apply[k];
+			Balance.push(leaves.toFixed(2));
+		}
+		
+////////////////////////////////////// Table Construction /////////////////////////////////////
+	
+		// creates a <table> element and a <tbody> element
+		const tbl = document.createElement("table");
+		const tblBody = document.createElement("tbody");
+		
+
+///////////////////////////////////////// First Row ///////////////////////////////////////////////	
+		// creating all cells
+		for (let i = 0; i < 1; i++) {
+			// creates a table row
+			const row = document.createElement("tr");
+		
+			for (let j = 0; j < 5; j++) {
+			// Create a <td> element and a text node, make the text
+			// node the contents of the <td>, and put the <td> at
+			// the end of the table row
+			const cell = document.createElement("td");
+			
+			//const cellText = document.createTextNode("Day");
+			if(j==0){
+				
+				
+				cellText = document.createTextNode("Day");
+			}
+			
+			else if(j==1){
+			
+				cellText = document.createTextNode("Date");
+			}
+			
+			else if(j==2){
+			
+				cellText = document.createTextNode("DOW");
+			}
+			
+			else if(j==3){
+			
+				cellText = document.createTextNode("Apply");
+			}
+			
+			else if(j==4){
+			
+				cellText = document.createTextNode("Balance");
+			}
+			
+			cell.appendChild(cellText);
+			
+			cell.style.textAlign = "center";
+			
+			cell.style.backgroundColor = "green";
+			
+			row.appendChild(cell);
+			}
+		
+			// add the row to the end of the table body
+			tblBody.appendChild(row);
+		}
+	
+		// put the <tbody> in the <table>
+		tbl.appendChild(tblBody);
+		// appends <table> into <body>
+		document.body.appendChild(tbl);
+		// sets the border attribute of tbl to '2'
+		tbl.setAttribute("border", "2");
+		
+////////////////////////////////////////// Rest of the Rows///////////////////////////////////////////////////////
+
+// creating all cells
+		for (let i = 0; i < 365; i++) {
+			// creates a table row
+			const row = document.createElement("tr");
+		
+			for (let j = 0; j < 5; j++) {
+			// Create a <td> element and a text node, make the text
+			// node the contents of the <td>, and put the <td> at
+			// the end of the table row
+			const cell = document.createElement("td");
+			
+			//const cellText = document.createTextNode("Day");
+			if(j==0){
+				
+				
+				cellText = document.createTextNode(I[i]);
+			}
+			
+			else if(j==1){
+			
+				cellText = document.createTextNode(Day[i]);
+			}
+			
+			else if(j==2){
+			
+				cellText = document.createTextNode(DOW[i]);
+			}
+			
+			else if(j==3){
+			
+				cellText = document.createTextNode(Apply[i]);
+			}
+			
+			else if(j==4){
+			
+				cellText = document.createTextNode(Balance[i]);
+			}
+			
+			cell.appendChild(cellText);
+			cell.style.textAlign = "center";
+			
+			row.appendChild(cell);
+			}
+		
+			// add the row to the end of the table body
+			tblBody.appendChild(row);
+		}
+	
+		// put the <tbody> in the <table>
+		tbl.appendChild(tblBody);
+		// appends <table> into <body>
+		document.body.appendChild(tbl);
+		// sets the border attribute of tbl to '2'
+		tbl.setAttribute("border", "2");
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	</script>
 
   </body>	
